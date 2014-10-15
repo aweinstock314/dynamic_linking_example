@@ -1,4 +1,4 @@
-FILES=shared_library_wrapper.o shared_lib_caller cpp_slib_caller library1.so library2.so
+FILES=shared_library_wrapper.o shared_lib_caller cpp_slib_caller library1.so library2.so library3.so
 WARNINGS=-Wall -Wextra -pedantic
 
 all: $(FILES)
@@ -14,6 +14,8 @@ library1.so: shared_lib.cpp
 	g++ $^ -DLIBRARY_PREFIX='"LIBRARY1 "' -shared $(WARNINGS) -o $@
 library2.so: shared_lib.cpp
 	g++ $^ -DLIBRARY_PREFIX='"LIBRARY2 "' -shared $(WARNINGS) -o $@
+library3.so: rust_sharedlib.rs
+	rustc $^ -o $@
 
 clean:
 	rm $(FILES)
