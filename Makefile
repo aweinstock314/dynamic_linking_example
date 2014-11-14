@@ -16,6 +16,8 @@ library2.so: shared_lib.cpp
 	g++ $^ -DLIBRARY_PREFIX='"LIBRARY2 "' -shared $(WARNINGS) -o $@
 library3.so: rust_sharedlib.rs
 	rustc $^ -o $@
+library4.so: formatstring.rs
+	rustc $^ -o $@
 
 clean:
 	rm $(FILES)
