@@ -11,10 +11,7 @@ showUsage = do
 foreign import ccall "dynamic"
     callCFunc :: FunPtr () -> (IO ())
 
-doDynamicFuncall libname fnname = withDL libname [RTLD_NOW] (\dl -> do
-    fn <- dlsym dl fnname
-    callCFunc fn
-    )
+doDynamicFuncall libname fnname = withDL libname [RTLD_NOW] (\dl -> dlsym dl fnname >>= callCFunc)
 
 main = do
     args <- getArgs
